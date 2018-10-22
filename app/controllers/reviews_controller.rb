@@ -4,10 +4,10 @@ class ReviewsController < ApplicationController
 
   # get all reviews for a restaurant by calling GET /restaurant/rest_id/review
   def index
-    @reviews = Review.where(restaurant_id: params[:restaurant_id])
+    reviews = Review.where(restaurant_id: params[:restaurant_id])
     render json: {
-        status: 200,
-        reviews: @reviews
+      status: 200,
+      reviews: reviews
     }.to_json
   end
 
@@ -17,11 +17,16 @@ class ReviewsController < ApplicationController
     restaurant = Restaurant.find(params[:restaurant_id])
     review = restaurant.reviews.new(review_params)
 
-    if review.save! *********
+    begin
+      review.save!
       render json: {
-          status: 200,
-          restaurant: params[:restaurant_id],
-          review: review
+        status: 200,
+        message: 'The review was added successfully :)',
+      }.to_json
+    rescue StandardError => e
+      render json: {
+        status: 500,
+        message: 'Failed to add a review. Please try again :('
       }.to_json
     end
 

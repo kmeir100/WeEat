@@ -6,28 +6,26 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.new
   end
 
-  #get all restaurant by calling GET /restaurant
   def index
     restaurants = Restaurant.all
     render json: {
-        status: 200,
-        restaurants: restaurants
+      status: 200,
+      restaurants: restaurants
     }.to_json
   end
 
-  #add new restaurant by calling POST /restaurant
   def create
     restaurant = Restaurant.new(restaurant_params)
     begin
       restaurant.save!
       render json: {
-          status: 200,
-          message: 'The restaurant added successfully :)'
+        status: 200,
+        message: 'The restaurant was added successfully :)'
       }.to_json
-    rescue => e
+    rescue StandardError => e
       render json: {
-          status: 500,
-          message: 'Failed to add the restaurant. Try again :('
+        status: 500,
+        message: 'Failed to add a restaurant. Try again :('
       }.to_json
     end
   end
