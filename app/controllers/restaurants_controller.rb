@@ -8,24 +8,21 @@ class RestaurantsController < ApplicationController
 
   def index
     restaurants = Restaurant.all
-    render json: {
-      status: 200,
-      restaurants: restaurants
+    render status: 200, json: {
+        restaurants: restaurants
     }.to_json
   end
 
   def create
-    restaurant = Restaurant.new(restaurant_params)
     begin
+      restaurant = Restaurant.new(restaurant_params)
       restaurant.save!
-      render json: {
-        status: 200,
-        message: 'The restaurant was added successfully :)'
+      render status: 200, json: {
+          message: 'The restaurant was added successfully :)'
       }.to_json
     rescue StandardError => e
-      render json: {
-        status: 500,
-        message: 'Failed to add a restaurant. Try again :('
+      render status: 500, json: {
+          message: 'Failed to add a restaurant. Please try again :('
       }.to_json
     end
   end
@@ -33,8 +30,11 @@ class RestaurantsController < ApplicationController
   private
 
   def restaurant_params
-    params.require(:restaurant_params).permit(:name, :cuisine, :tenbis, :address, :delivery_time)
+    params.require(:name)
+    params.require(:cuisine)
+    params.require(:tenbis)
+    params.require(:address)
+    params.require(:delivery_time)
+    params.permit(:name, :cuisine, :tenbis, :address, :delivery_time)
   end
-
-
 end
