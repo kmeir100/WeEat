@@ -15,12 +15,7 @@ class ReviewsController < ApplicationController
 
     begin
       restaurant = Restaurant.find(params[:restaurant_id])
-      review = restaurant.reviews.new(review_params)
-
-      ActiveRecord::Base.transaction do
-        review.save!
-        restaurant.set_rating!
-      end
+      restaurant.reviews.create!(review_params)
 
       render status: 200, json: {
           message: 'The review was added successfully :)',
