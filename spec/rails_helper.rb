@@ -61,5 +61,3 @@ RSpec.configure do |config|
 end
 
 require 'factory_bot'
-
-

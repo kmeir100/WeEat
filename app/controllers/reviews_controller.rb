@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
   def index
     reviews = Review.where(restaurant_id: params[:restaurant_id])
     render status: 200, json: {
-        reviews: reviews
+      reviews: reviews
     }.to_json
   end
 
@@ -18,11 +18,11 @@ class ReviewsController < ApplicationController
       restaurant.reviews.create!(review_params)
 
       render status: 200, json: {
-          message: 'The review was added successfully :)',
+        message: 'The review was added successfully :)',
       }.to_json
     rescue StandardError => e
       render status: 500, json: {
-          message: 'Failed to add a review. Please try again :('
+        message: 'Failed to add a review. Please try again :('
       }.to_json
     end
   end
@@ -30,9 +30,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:name)
-    params.require(:description)
-    params.require(:rate)
+    params.require(%i[name description rate])
     params.permit(:name, :description, :rate)
   end
 end

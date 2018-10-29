@@ -31,11 +31,7 @@ class RestaurantsController < ApplicationController
   private
 
   def restaurant_params
-    params.require(:name)
-    params.require(:cuisine)
-    params.require(:tenbis)
-    params.require(:address)
-    params.require(:delivery_time)
+    params.require(%i[name cuisine tenbis address delivery_time])
     params.permit(:name, :cuisine, :tenbis, :address, :delivery_time)
   end
 end
