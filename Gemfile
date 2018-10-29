@@ -64,3 +64,14 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'rubocop', require: false
+
+gem "rspec-core", :github => "rspec/rspec-core"
+gem "rspec-expectations", :github => "rspec/rspec-expectations"
+gem "rspec-mocks", :github => "rspec/rspec-mocks"
+gem "rspec-support", :github => "rspec/rspec-support"
+gem "rspec-rails", :github => "rspec/rspec-rails"
+
+
+gem 'factory_bot_rails'
+
+gem 'faker'
