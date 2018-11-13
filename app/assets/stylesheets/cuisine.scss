@@ -1,0 +1,17 @@
+
+@font-face {
+  font-family: 'CuisineFont';
+  src: url('fonts/efcuisines-regular-webfont.eot'); /* IE9 Compat Modes */
+  //src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  //url('webfont.woff2') format('woff2'), /* Super Modern Browsers */
+  //url('webfont.woff') format('woff'), /* Pretty Modern Browsers */
+  src: url('fonts/efcuisines-regular-webfont.ttf')  format('truetype'); /* Safari, Android, iOS */
+  //url('webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+.cuisine-icon {
+  width: 20px;
+  height: 20px;
+  font-family: 'CuisineFont', Fallback, sans-serif;
+  font-size: 3em;
+}
