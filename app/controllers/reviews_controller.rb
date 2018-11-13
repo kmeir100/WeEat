@@ -1,7 +1,5 @@
 class ReviewsController < ApplicationController
 
-  protect_from_forgery with: :null_session
-
   # get all reviews for a restaurant by calling GET /restaurant/rest_id/review
   def index
     reviews = Review.where(restaurant_id: params[:restaurant_id])
