@@ -2,7 +2,7 @@ import React from 'react';
 
 class RestRate extends React.Component {
     render() {
-        const rate = (this.props.rate / 5.0) * 125.0;
+        const rate = (this.props.rate / 5.0) * 100.0;
         return (
             <div className="rate">
                 <div className="star-ratings-css">

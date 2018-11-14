@@ -43,7 +43,7 @@ class AddReviewForm extends React.Component {
     }
 
     handleChange = (e) => {
-        console.log("e name= " + e.target.value);
+        //console.log("e name= " + e.target.value);
         const items = this.state.reviews;
 
         switch (e.target.name) {

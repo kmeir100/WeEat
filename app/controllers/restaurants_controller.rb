@@ -6,6 +6,8 @@ class RestaurantsController < ApplicationController
   end
 
   def index
+    Restaurant.get_restaurants_from_zomato
+
     restaurants = Restaurant.all
     render status: 200, json: {
       restaurants: restaurants

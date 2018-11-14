@@ -11,11 +11,12 @@ class restaurant extends React.Component {
     }
 
     render() {
+        //console.log("filters= " + this.props.setFilters.cuisine);
         return (
             <div className="restaurant-list">
                 {this.props.restaurants.filter(
                     u =>
-                        (this.props.setFilters.cuisine = "All" || u.cuisine === this.props.setFilters.cuisine) &&
+                        (this.props.setFilters.cuisine === "All" || u.cuisine.includes(this.props.setFilters.cuisine)) &&
                         u.tenbis === this.props.setFilters.tenbis &&
                         u.delivery_time <= this.props.setFilters.maxDeliveryTime &&
                         (u.rating >= this.props.setFilters.rating || u.rating === null)

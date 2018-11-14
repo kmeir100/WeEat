@@ -26,7 +26,7 @@ class AddReview extends React.Component {
     }
 
     render() {
-        console.log("on " + this.props.restaurantId);
+        //console.log("on " + this.props.restaurantId);
         return (
             <button className="add_review_btn" onClick={this.on}>Add Review</button>
         );

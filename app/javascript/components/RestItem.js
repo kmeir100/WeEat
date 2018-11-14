@@ -10,7 +10,7 @@ import GetReviews from './GetReviews';
 class RestItem extends React.Component {
   render() {
     const item = this.props.rest;
-    console.log('item= ' + this.props.restId);
+    //console.log('item= ' + this.props.restId);
     return (
       <div className="container">
         <div className="item a">
