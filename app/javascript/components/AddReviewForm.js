@@ -30,7 +30,7 @@ class AddReviewForm extends React.Component {
         //     rests: posts,
         // });
         //console.log(response);
-        this.off();
+        this.hide();
       })
       .catch(error => {
         // handle error
