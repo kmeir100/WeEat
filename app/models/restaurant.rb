@@ -51,6 +51,8 @@ class Restaurant < ApplicationRecord
                         :tenbis=> false,
                         :address=> child['restaurant']['location']['address'],
                         :delivery_time=> 30,
+                          :lat=> child['restaurant']['location']['latitude'],
+                          :long=> child['restaurant']['location']['longitude'],
                         ).
           update(:zoomato_id=> child['restaurant']['id'],
                         :name=> child['restaurant']['name'],
@@ -58,7 +60,10 @@ class Restaurant < ApplicationRecord
                         :rating=> child['restaurant']['user_rating']['aggregate_rating'].to_d,
                         :tenbis=> false,
                         :address=> child['restaurant']['location']['address'],
-                        :delivery_time=> 30,)
+                        :delivery_time=> 30,
+                        :lat=> child['restaurant']['location']['latitude'],
+                        :long=> child['restaurant']['location']['longitude'],
+                 )
     end
 
     #puts res.body
