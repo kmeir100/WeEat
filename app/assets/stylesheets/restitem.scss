@@ -1,12 +1,9 @@
 
 .container {
   display: flex;
-  //flex-direction: row;
   justify-content: space-evenly;
   //background-color: #c59b08;
   margin: 0 0 1px 0;
-  //padding: 5px;
-  align-items: baseline;
   border: 1px solid black;
 }
 
@@ -14,22 +11,21 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  //align-items: center;
   margin: auto;
   padding: 5px;
 }
 
-.a {
+.cuisine {
   width: 10%;
   //background-color: #c5c545;
 }
 
-.b {
+.name-rating {
   width: 70%;
   //background-color: blueviolet;
 }
 
-.c {
+.tenbis {
   width: 20%;
 }
 
@@ -38,4 +34,9 @@
   font-weight: bold;
   text-align: center;
   font-size: 2em;
+}
+
+.tenbis-img {
+  width: 40px;
+  height: 40px;
 }

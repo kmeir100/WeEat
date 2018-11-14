@@ -1,88 +1,71 @@
 import React from 'react';
-import Rating from './Rating';
-import Toggle from './Toggle';
-import DropDown from './DropDown';
-import RangeSlider from './Slider';
+import RatingFilter from './RatingFilter';
+import TenbisFilter from './TenbisFilter';
+import CuisineFilter from './CuisineFilter';
+import DeliveryTimeFilter from './DeliveryTimeFilter';
 
 class Filter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filters: {
+        cuisine: 'All',
+        rating: 1,
+        maxDeliveryTime: 180,
+        tenbis: false,
+      },
+    };
+  }
 
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            filters: {
-                cuisine: "All",
-                rating: 1,
-                maxDeliveryTime: 180,
-                tenbis: false,
-            },
-        };
-
+  updateFilters = (value, type) => {
+    const items = this.state.filters;
+    switch (type) {
+      case 'cuisine':
+        items.cuisine = value;
+        break;
+      case 'rating':
+        items.rating = value;
+        break;
+      case 'delivery_time':
+        items.maxDeliveryTime = value;
+        break;
+      case 'tenbis':
+        items.tenbis = value;
+        break;
+      default:
+        return;
     }
 
-    setCuisine = (c) => {
-        const items = this.state.filters;
-        items.cuisine = c;
+    this.setState({
+      filters: items,
+    }, () => {
+      //console.log(this.state.filters);
+      this.props.onFilterChanged(this.state.filters);
+    });
+  }
 
-        this.setState({
-            filters: items,
-        },() => { console.log(this.state.filters);
-            this.props.passFilter(this.state.filters);});
-    }
-
-    setRating = (c) => {
-        const items = this.state.filters;
-        items.rating = c;
-
-        this.setState({
-            filters: items,
-        },() => { console.log(this.state.filters);
-                this.props.passFilter(this.state.filters);});
-    }
-
-    setMaxDeliveryTime = (c) => {
-        const items = this.state.filters;
-        items.maxDeliveryTime = c;
-
-        this.setState({
-            filters: items,
-        },() => { console.log(this.state.filters);
-            this.props.passFilter(this.state.filters);});
-    }
-
-    setTenBis = (c) => {
-        const items = this.state.filters;
-        items.tenbis = c;
-
-        this.setState({
-            filters: items,
-        },() => { console.log(this.state.filters);
-            this.props.passFilter(this.state.filters);});
-    }
-
-    render() {
-        return (
-            <div className="flex-container">
-                <div className="filter-item">
-                    <div className="headline">Cuisine</div>
-                    <DropDown onChangeProp={this.setCuisine}/>
-                </div>
-                <div className="filter-item">
-                    <div className="headline">Rating</div>
-                    <Rating onChangeProp={this.setRating}/>
-                </div>
-                <div className="filter-item">
-                    <div className="headline">Maximum delivery time</div>
-                    <RangeSlider onChangeProp={this.setMaxDeliveryTime}/>
-                </div>
-                <div className="filter-item">
-                    <div className="headline">10bis</div>
-                    <Toggle onChangeProp={this.setTenBis}/>
-                </div>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="flex-container">
+        <div className="filter-item">
+          <div className="headline">Cuisine</div>
+          <CuisineFilter onChange={this.updateFilters}/>
+        </div>
+        <div className="filter-item">
+          <div className="headline">Rating</div>
+          <RatingFilter onChange={this.updateFilters}/>
+        </div>
+        <div className="filter-item">
+          <div className="headline">Maximum delivery time</div>
+          <DeliveryTimeFilter onChange={this.updateFilters}/>
+        </div>
+        <div className="filter-item">
+          <div className="headline">10bis</div>
+          <TenbisFilter onChange={this.updateFilters}/>
+        </div>
+      </div>
+    );
+  }
 }
-
 
 export default Filter;

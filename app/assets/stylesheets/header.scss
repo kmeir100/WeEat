@@ -1,67 +1,52 @@
-
 @font-face {
   font-family: 'HeaderFont';
   //src: url('fonts/efcuisines-regular-webfont.eot'); /* IE9 Compat Modes */
   //src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
   //url('webfont.woff2') format('woff2'), /* Super Modern Browsers */
   //url('webfont.woff') format('woff'), /* Pretty Modern Browsers */
-  src: url('fonts/Noteworthy.ttc')  format('truetype'); /* Safari, Android, iOS */
+  src: url('fonts/Noteworthy.ttc') format('truetype'); /* Safari, Android, iOS */
   //url('webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
-  .page-header {
-    position: relative;
+
+.page-header {
+  position: relative;
+  width: 100%;
+  //background-color: #c59b08;
+  font-family: "HeaderFont", serif;
+
+  .header-img {
+    //position: absolute;
     width: 100%;
-    //background-color: #c59b08;
-    font-family: "HeaderFont", serif;
-
-    .header-img {
-      //position: absolute;
-      width: 100%;
-      border: 1px solid black;
-      //transform: translate(-0%,-0%);
-      z-index: 1
-    }
-
-    .text {
-      position: absolute;
-      top: 25%;
-      left: 25%;
-      font-size: 8em;
-      //background-color: cornflowerblue;
-      transform: translate(-50%,-50%);
-      //text-align: center;
-      //z-index: 2
-    }
-
-    .sub-text {
-      position: absolute;
-      top: 50%;
-      left: 25%;
-      transform: translate(-50%,-50%);
-      font-size: 2em;
-     // background-color: #B00100;
-      //z-index: 3
-    }
-
-    .items-container{
-      display: flex;
-      //background-color: #c59b08;
-      position: absolute;
-
-      top: 80%;
-      left: 21%;
-      width: 40%;
-      justify-content: space-around;
-      //text-align: center;
-      transform: translate(-50%,-50%);
-      padding: 5px 8px;
-      //border: 1px solid black;
-
-    }
-
+    border: 1px solid black;
+    //transform: translate(-0%,-0%);
+    z-index: 1
   }
 
+  .text {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    font-size: 8em;
+    //background-color: cornflowerblue;
+    transform: translate(-50%, -50%);
+  }
 
+  .sub-text {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+  }
 
-
-
+  .items-container {
+    display: flex;
+    position: absolute;
+    top: 80%;
+    left: 21%;
+    width: 40%;
+    justify-content: space-around;
+    transform: translate(-50%, -50%);
+    padding: 5px 8px;
+  }
+}
