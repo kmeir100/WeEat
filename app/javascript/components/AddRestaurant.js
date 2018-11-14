@@ -3,7 +3,7 @@ import React from 'react';
 class AddRestaurant extends React.Component {
 
   show() {
-    document.getElementById('add_rest_form').style.display = 'block';
+    document.getElementById('add-rest-form').style.display = 'block';
   }
 
   render() {

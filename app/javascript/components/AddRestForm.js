@@ -72,13 +72,13 @@ class AddRestForm extends React.Component {
 
 
   hide() {
-    document.getElementById("add_rest_form").style.display = "none";
+    document.getElementById("add-rest-form").style.display = "none";
   }
 
   render() {
     return (
-      <div id="add_rest_form">
-        <form className="add_rest_form">
+      <div id="add-rest-form">
+        <form className="add-rest-form">
           Restaurant name: <input type="text" align="left" name="name" onChange={this.handleChange}></input><br/>
           Address: <input type="text" align="left" name="address" onChange={this.handleChange}></input><br/>
           Cuisine: <input type="text" name="cuisine" onChange={this.handleChange}></input><br/>

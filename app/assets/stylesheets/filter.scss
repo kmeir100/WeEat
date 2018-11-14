@@ -1,21 +1,12 @@
 
 .flex-container {
   display: flex;
-  //background-color: darkgreen;
   width: 90%;
   justify-content: space-around;
   padding: 5px 8px;
   border: 1px solid black;
 
   .filter-item {
-    //background-color: cornflowerblue;
     font-size: 20px;
-    justify-content: space-around;
-    flex-direction: column;
-    padding: 2px;
-  }
-
-  .headline {
-    //background-color: #e7711b;
   }
 }
