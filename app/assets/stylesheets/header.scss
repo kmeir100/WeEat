@@ -4,7 +4,7 @@
   //src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
   //url('webfont.woff2') format('woff2'), /* Super Modern Browsers */
   //url('webfont.woff') format('woff'), /* Pretty Modern Browsers */
-  src: url('fonts/Noteworthy.ttc') format('truetype'); /* Safari, Android, iOS */
+  src: asset_url('fonts/Noteworthy.ttc') format('truetype'); /* Safari, Android, iOS */
   //url('webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
 
