@@ -19,12 +19,17 @@ class MainComponent extends React.Component {
         maxDeliveryTime: 180,
         tenbis: false,
       },
-      restaurantId: 1,
+      restForm: {
+        showtoggle: false,
+      },
+      reviewForm: {
+        restaurantId: 1,
+        showtoggle: false,
+      }
     };
   }
 
   handleFilterChanged = (filters) => {
-    // console.log("filters= " + filters);
     this.setState({
       filters: filters,
     });
@@ -34,7 +39,7 @@ class MainComponent extends React.Component {
     axios.get('/restaurants')
       .then(response => {
         // handle success
-        const posts = response.data.restaurants.map(x => x);
+        const posts = response.data.restaurants;
         this.setState({
           rests: posts,
         });
@@ -49,17 +54,39 @@ class MainComponent extends React.Component {
       });
   }
 
+  show = (type, toggle, id)=> {
+    switch (type) {
+      case 'restaurant':
+        this.setState({
+          restForm: {
+            showtoggle: toggle,
+          },
+        });
+        break;
+      case 'review':
+        this.setState({
+          reviewForm: {
+            restaurantId: id,
+            showtoggle: toggle,
+          },
+        });
+        break;
+      default:
+        return;
+    }
+  }
+
   render() {
     return (
       <div className="main-page">
-        <Header onFilterChanged={this.handleFilterChanged}/>
+        <Header onFilterChanged={this.handleFilterChanged} showtoggle={this.show}/>
         <div className="items">
-          <Restaurants restaurants={this.state.rests} filters={this.state.filters}/>
-          <Map className="map">map</Map>
+          <Restaurants restaurants={this.state.rests} filters={this.state.filters} showtoggle={this.show}/>
+          <Map className="map" >map</Map>
         </div>
 
-        <AddRestForm/>
-        <AddReviewForm restaurandId={this.state.restaurantId}/>
+        <AddRestForm isRestFormDisplayed={this.state.restForm.showtoggle} changeState={this.show}/>
+        <AddReviewForm changeState={this.show} isReviewFormDisplayed={this.state.reviewForm.showtoggle} restaurandId={this.state.reviewForm.restaurantId}/>
         <ReviewsOverlay/>
       </div>
     );

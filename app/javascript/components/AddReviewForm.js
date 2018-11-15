@@ -15,22 +15,16 @@ class AddReviewForm extends React.Component {
     };
   }
 
-  addRestaurant = () => {
-    const id = document.getElementById("add-review-form").getAttribute('restId');
-    //console.log("data= " + this.state.reviews.name + " " + this.state.reviews.description + " " + this.state.reviews.rate);
-    axios.post(`/restaurants/` + id + '/reviews', {
-      name: this.state.reviews.name,
-      description: this.state.reviews.description,
-      rate: this.state.reviews.rate,
+  addReview = (event) => {
+    event.preventDefault();
+    axios.post(`/restaurants/` + this.props.restaurandId + '/reviews', {
+      name: event.target.name.value,
+      description: event.target.description.value,
+      rate: event.target.rate.value,
     })
       .then(response => {
+        console.log(response);
         // handle success
-        const status = response.status;
-        // this.setState({
-        //     rests: posts,
-        // });
-        //console.log(response);
-        this.hide();
       })
       .catch(error => {
         // handle error
@@ -38,45 +32,26 @@ class AddReviewForm extends React.Component {
       })
       .then(() => {
         // always executed
+        this.hide();
       });
   }
 
-  handleChange = (event) => {
-    //console.log("e name= " + event.target.value);
-    const items = this.state.reviews;
-
-    switch (event.target.name) {
-      case 'name':
-        items.name = event.target.value;
-        break;
-      case 'description':
-        items.description = event.target.value;
-        break;
-      case 'rate':
-        items.rate = event.target.value;
-        break;
-      default:
-        return;
-    }
-
-    this.setState({reviews: items});
-  }
-
-  hide() {
-    document.getElementById("add-review-form").style.display = "none";
+  hide = () => {
+    this.props.changeState('review', false);
   }
 
   render() {
+    const showOrHide = this.props.isReviewFormDisplayed?'show':'hide';
     return (
-      <div id="add-review-form">
-        <form className="addreview-form">
-          Your name: <input type="text" align="left" name="name" onChange={this.handleChange}></input><br/>
-          What do you think about this restaurant?: <input type="text" align="left" name="description" onChange={this.handleChange}></input><br/>
-          rate: <input type="text" name="rate" onChange={this.handleChange}></input><br/>
+      <div id="add-review-form" className={showOrHide}>
+        <form className="add-review-form" onSubmit={this.addReview}>
+          Your name: <input type="text" align="left" name="name" /><br/>
+          What do you think about this restaurant?: <input type="text" align="left" name="description" /><br/>
+          rate: <input type="text" name="rate" /><br/>
           <div className="form_btn" align="center">
-            <input type="button" value="Cancel" onClick={this.hide}></input>
-            <input type="reset" value="Reset"></input>
-            <input type="button" value="Submit" onClick={this.addRestaurant}></input>
+            <input type="button" value="Cancel" onClick={this.hide}/>
+            <input type="reset" value="Reset"/>
+            <input type="submit" value="Submit"/>
           </div>
         </form>
       </div>

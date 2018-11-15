@@ -11,18 +11,17 @@ class Restaurant extends React.Component {
   }
 
   render() {
-    //console.log("filters= " + this.props.filters.cuisine);
     return (
       <div className="restaurant-list">
         {this.props.restaurants.filter(
           u =>
-            (this.props.filters.cuisine === "All" || u.cuisine.includes(this.props.filters.cuisine)) &&
-            u.tenbis === this.props.filters.tenbis &&
-            u.delivery_time <= this.props.filters.maxDeliveryTime &&
-            (u.rating >= this.props.filters.rating || u.rating === null)
+            (this.props.filters.cuisine === "All" || u.cuisine.includes(this.props.filters.cuisine))
+            && u.tenbis === this.props.filters.tenbis
+            && u.delivery_time <= this.props.filters.maxDeliveryTime
+            && (u.rating >= this.props.filters.rating || u.rating === null)
         ).map(item => {
           return (
-            <RestItem key={item.id} restaurant={item}/>
+            <RestItem key={item.id} restaurant={item} showtoggle={this.props.showtoggle}/>
           );
         })}
       </div>

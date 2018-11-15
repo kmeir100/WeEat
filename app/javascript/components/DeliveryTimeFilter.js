@@ -18,13 +18,12 @@ class RangeSlider extends React.Component {
 
 
   render() {
+    const times = [30, 60, 90, 120, 180];
     return (
       <div className="max-del-time">
-        <button className="btn" onClick={this.handleChange} value="30">30</button>
-        <button className="btn" onClick={this.handleChange} value="60">60</button>
-        <button className="btn" onClick={this.handleChange} value="90">90</button>
-        <button className="btn" onClick={this.handleChange} value="120">120</button>
-        <button className="btn" onClick={this.handleChange} value="180">180</button>
+      {times.map(item => {
+        return (<button className="btn" onClick={this.handleChange} key={item} value={item}>{item}</button>);
+      })}
       </div>
     );
   }

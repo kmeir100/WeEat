@@ -12,7 +12,7 @@ class Header extends React.Component {
         <div className="text">WeEat</div>
         <div className="sub-text">Eat Differently</div>
         <div className="items-container">
-          <AddRestaurant />
+          <AddRestaurant showtoggle={this.props.showtoggle}/>
           <Filter onFilterChanged={this.props.onFilterChanged}/>
         </div>
       </div>

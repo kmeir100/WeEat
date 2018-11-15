@@ -13,7 +13,15 @@
   opacity: 0.97;
 }
 
-.addreview-form{
+.add-review-form{
   margin: 5px;
   font-size: 1em;
 }
+
+#add-review-form.show{
+  display: block;
+ }
+
+#add-review-form.hide{
+   display: none;
+ }

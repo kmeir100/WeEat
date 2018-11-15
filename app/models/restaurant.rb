@@ -19,7 +19,7 @@ class Restaurant < ApplicationRecord
   end
 
 
-  def self.get_restaurants_from_zomato
+  def self.retrieve_restaurants_from_zoomato
 
     uri = URI.parse('https://developers.zomato.com/api/v2.1/search?entity_id=280&entity_type=city')
     http = Net::HTTP.new(uri.host, uri.port)
@@ -28,46 +28,46 @@ class Restaurant < ApplicationRecord
     request = Net::HTTP::Get.new(uri.request_uri)
     request['user-key'] = '26e442c3bc4472de67b4c5e33beb28be'
 
-    res = http.request(request)
+    begin
+      res = http.request(request)
+      hash = JSON.parse(res.body)
 
-    hash = JSON.parse(res.body)
+      hash['restaurants'].each do |child|
 
-    hash['restaurants'].each do |child|
-      # puts child['restaurant']['id']
-      # puts child['restaurant']['name']
-      # puts child['restaurant']['location']['address']
-      # puts child['restaurant']['location']['latitude']
-      # puts child['restaurant']['location']['longitude']
-      # puts 'cuisine= ' + child['restaurant']['cuisines']
-      # rating = child['restaurant']['user_rating']['aggregate_rating']
-      # ratingNumber = rating.to_d
-      # puts '----'
+        zoomato_id = child['restaurant']['id']
+        name = child['restaurant']['name']
+        cuisine = child['restaurant']['cuisines']
+        rating = child['restaurant']['user_rating']['aggregate_rating'].to_d
+        tenbis = false
+        address = child['restaurant']['location']['address']
+        delivery_time = 30
+        lat = child['restaurant']['location']['latitude']
+        long = child['restaurant']['location']['longitude']
 
-      Restaurant.where(zoomato_id: child['restaurant']['id']).
-          first_or_create(:zoomato_id=> child['restaurant']['id'],
-                        :name=> child['restaurant']['name'],
-                        :cuisine=> child['restaurant']['cuisines'],
-                        :rating=> child['restaurant']['user_rating']['aggregate_rating'].to_d,
-                        :tenbis=> false,
-                        :address=> child['restaurant']['location']['address'],
-                        :delivery_time=> 30,
-                        :lat=> child['restaurant']['location']['latitude'],
-                        :long=> child['restaurant']['location']['longitude'],
-                        ).
-          update(:zoomato_id=> child['restaurant']['id'],
-                        :name=> child['restaurant']['name'],
-                        :cuisine=> child['restaurant']['cuisines'],
-                        :rating=> child['restaurant']['user_rating']['aggregate_rating'].to_d,
-                        :tenbis=> false,
-                        :address=> child['restaurant']['location']['address'],
-                        :delivery_time=> 30,
-                        :lat=> child['restaurant']['location']['latitude'],
-                        :long=> child['restaurant']['location']['longitude'],
-                 )
+        Restaurant.where(zoomato_id: child['restaurant']['id']).
+          first_or_create(zoomato_id: zoomato_id,
+                          name: name,
+                          cuisine: cuisine,
+                          rating: rating,
+                          tenbis: tenbis,
+                          address: address,
+                          delivery_time: delivery_time,
+                          lat: lat,
+                          long: long)
+          .update(zoomato_id: zoomato_id,
+                  name: name,
+                  cuisine: cuisine,
+                  rating: rating,
+                  tenbis: tenbis,
+                  address: address,
+                  delivery_time: delivery_time,
+                  lat: lat,
+                  long: long)
+      end
+
+    rescue StandardError, JSON::ParserError => e
+      console.log(e)
     end
-
-    #puts res.body
-
   end
 
 end

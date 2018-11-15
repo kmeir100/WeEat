@@ -2,8 +2,8 @@ import React from 'react';
 
 class AddRestaurant extends React.Component {
 
-  show() {
-    document.getElementById('add-rest-form').style.display = 'block';
+  show = () => {
+    this.props.showtoggle('restaurant', true);
   }
 
   render() {

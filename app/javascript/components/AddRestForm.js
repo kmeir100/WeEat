@@ -3,36 +3,17 @@ import axios from 'axios';
 
 class AddRestForm extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      rests: [],
-      addRest: {
-        name: "",
-        cuisine: "",
-        tenbis: false,
-        address: "",
-        delivery_time: 180,
-      },
-    };
-  }
-
-  addRestaurant = (e) => {
+  addRestaurant = (event) => {
+    event.preventDefault();
     axios.post(`/restaurants`, {
-      name: this.state.addRest.name,
-      cuisine: this.state.addRest.cuisine,
-      tenbis: this.state.addRest.tenbis,
-      address: this.state.addRest.address,
-      delivery_time: this.state.addRest.delivery_time,
+      name: event.target.name.value,
+      cuisine: event.target.cuisine.value,
+      tenbis: event.target.tenbis.value,
+      address: event.target.address.value,
+      delivery_time: event.target.delivery_time.value,
     })
       .then(response => {
         // handle success
-        const status = response.status;
-        // this.setState({
-        //     rests: posts,
-        // });
-        //console.log(response);
-        this.hide();
       })
       .catch(error => {
         // handle error
@@ -40,54 +21,28 @@ class AddRestForm extends React.Component {
       })
       .then(() => {
         // always executed
+        this.hide();
       });
   }
 
-  handleChange = (event) => {
-    //console.log("e name= " + e.target.value);
-    const items = this.state.addRest;
-
-    switch (event.target.name) {
-      case 'name':
-        items.name = event.target.value;
-        break;
-      case 'cuisine':
-        items.cuisine = event.target.value;
-        break;
-      case 'tenbis':
-        items.tenbis = event.target.value == 'on' ? true : false;
-        break;
-      case 'address':
-        items.address = event.target.value;
-        break;
-      case 'delivery_time':
-        items.delivery_time = event.target.value;
-        break;
-      default:
-        return;
-    }
-
-    this.setState({addRest: items});
-  }
-
-
-  hide() {
-    document.getElementById("add-rest-form").style.display = "none";
+  hide = () => {
+    this.props.changeState('restaurant', false);
   }
 
   render() {
+    const showOrHide = this.props.isRestFormDisplayed?'show':'hide';
     return (
-      <div id="add-rest-form">
-        <form className="add-rest-form">
-          Restaurant name: <input type="text" align="left" name="name" onChange={this.handleChange}></input><br/>
-          Address: <input type="text" align="left" name="address" onChange={this.handleChange}></input><br/>
-          Cuisine: <input type="text" name="cuisine" onChange={this.handleChange}></input><br/>
-          Maximum delivery time: <input type="text" name="delivery_time" onChange={this.handleChange}></input><br/>
-          Accept 10Bis: <input type="checkbox" name="tenbis" onChange={this.handleChange}></input><br/>
+      <div id="add-rest-form" className={showOrHide} >
+        <form className="add-rest-form" onSubmit={this.addRestaurant}>
+          Restaurant name: <input type="text" align="left" name="name"/><br/>
+          Address: <input type="text" align="left" name="address"/><br/>
+          Cuisine: <input type="text" name="cuisine"/><br/>
+          Maximum delivery time: <input type="text" name="delivery_time"/><br/>
+          Accept 10Bis: <input type="checkbox" name="tenbis"/><br/>
           <div className="form_btn" align="center">
-            <input type="button" value="Cancel" onClick={this.hide}></input>
-            <input type="reset" value="Reset"></input>
-            <input type="button" value="Submit" onClick={this.addRestaurant}></input>
+            <input type="button" value="Cancel" onClick={this.hide}/>
+            <input type="reset" value="Reset"/>
+            <input type="submit" value="Submit" />
           </div>
         </form>
       </div>

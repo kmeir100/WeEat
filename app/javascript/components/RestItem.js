@@ -11,7 +11,6 @@ import notenbis from '../../assets/images/notenbis';
 class RestItem extends React.Component {
   render() {
     const item = this.props.restaurant;
-    // console.log('item= ' + this.props.restId);
     return (
       <div className="container">
         <div className="item cuisine">
@@ -25,7 +24,7 @@ class RestItem extends React.Component {
         <div className="item tenbis">
           <img className="tenbis-img" src={item.tenbis ? tenbis : notenbis}/>
           <Delivery time={item.delivery_time}/>
-          <AddReview restaurantId={item.id}/>
+          <AddReview restaurantId={item.id} showtoggle={this.props.showtoggle}/>
         </div>
       </div>
     );

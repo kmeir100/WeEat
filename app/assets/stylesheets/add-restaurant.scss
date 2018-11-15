@@ -42,7 +42,7 @@ input[type=text]{
   box-sizing: border-box;
 }
 
-input[type=button]{
+input[type=button],input[type=submit]{
   font-size: 2em;
   margin: auto;
   align-items: center;
@@ -51,4 +51,12 @@ input[type=button]{
 input[type=reset]{
   size: 20px;
   font-size: 2em;
+}
+
+#add-rest-form.show{
+  display: block;
+}
+
+#add-rest-form.hide{
+  display: none;
 }
